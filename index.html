@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A10 · Sichere Fehlerbehandlung</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="OWASP Lernlabor">
+      <span class="brand-mark">A10</span>
+      <span>OWASP Lernlabor</span>
+    </a>
+    <span class="status"><span class="status-dot"></span> Beispielumgebung</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Wenn Fehler passieren,<br><em>geht es um die richtige Reaktion.</em></h1>
+      </div>
+      <p class="intro">In diesem interaktiven Beispiel suchen wir ein Benutzerprofil. Dieselbe technische Störung wird drei verschiedene Arten der Fehlerbehandlung gegenübergestellt.</p>
+    </section>
+
+    <section class="lab-card">
+      <div class="panel profile-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="step-label">BEISPIEL · BENUTZERPROFIL</p>
+            <h2>Profil suchen</h2>
+          </div>
+          <span class="api-badge">/api/users/{id}</span>
+        </div>
+
+        <label for="userId">Benutzer-ID</label>
+        <div class="search-row">
+          <input id="userId" value="1042" inputmode="numeric" maxlength="8" aria-describedby="hint">
+          <button id="searchButton" type="button">Anfrage senden</button>
+        </div>
+        <p id="hint" class="hint">Gib eine ID ein oder verwende „1042“ für den Demonstrationsfehler.</p>
+
+        <div class="response" id="response" aria-live="polite">
+          <div class="empty-state">
+            <span class="empty-icon">↗</span>
+            <p>Wähle eine Fehlerbehandlungsvariante und sende eine Anfrage.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel scenario-panel">
+        <p class="step-label">FEHLERBEHANDLUNG WAHLEN</p>
+        <div class="scenario-list" role="radiogroup" aria-label="Fehlerbehandlungsvariante">
+          <button class="scenario active" data-mode="unsafe" role="radio" aria-checked="true">
+            <span class="scenario-number">01</span>
+            <span><strong>Unsichere Ausgabe</strong><small>Technische Details werden sichtbar</small></span>
+            <span class="radio-dot"></span>
+          </button>
+          <button class="scenario" data-mode="generic" role="radio" aria-checked="false">
+            <span class="scenario-number">02</span>
+            <span><strong>Generische, schlechte Meldung</strong><small>Nicht hilfreich oder aussagekräftig</small></span>
+            <span class="radio-dot"></span>
+          </button>
+          <button class="scenario" data-mode="safe" role="radio" aria-checked="false">
+            <span class="scenario-number">03</span>
+            <span><strong>Sichere Behandlung</strong><small>Klar, überprüfbar und kontrolliert</small></span>
+            <span class="radio-dot"></span>
+          </button>
+        </div>
+
+        <div class="assessment" id="assessment">
+          <p class="assessment-title"><span>⚠</span> Risiko sichtbar</p>
+          <p>Fehlertexte können SQL-Abfragen, Dateipfade, Framework-Versionen oder interne Abläufe offenlegen.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="principles">
+      <div class="section-heading">
+        <p class="eyebrow">Leitprinzipien</p>
+        <h2>Das Ziel: sicher <em>und</em> nutzerfreundlich.</h2>
+      </div>
+      <div class="principle-grid">
+        <article><span>01</span><h3>Keine Geheimnisse</h3><p>Keine Stacktraces, SQL-Fehler oder Systempfade an den Nutzer senden.</p></article>
+        <article><span>02</span><h3>Stabil reagieren</h3><p>Zustände prüfen und Fehler kontrolliert abfangen, statt Abstürze zu riskieren.</p></article>
+        <article><span>03</span><h3>Intern nachvollziehen</h3><p>Mit Correlation-ID und eindeutigen Logcodes Fehler für das Support-Team zuordnen.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>OWASP A10 · Interaktive Lernseite</footer>
+  <script src="app.js"></script>
+</body>
+</html>
